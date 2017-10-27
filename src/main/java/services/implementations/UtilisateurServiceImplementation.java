@@ -1,6 +1,8 @@
 package services.implementations;
 
 
+import java.util.List;
+
 import entities.Utilisateur;
 
 import repositories.UtilisateurRepository;
@@ -15,6 +17,11 @@ public class UtilisateurServiceImplementation implements UtilisateurService{
 	public Utilisateur create(Utilisateur utilisateur) {
 		
 				return rep.create(utilisateur);
+	}
+	
+	public List<Utilisateur> readAll()
+	{
+		return rep.readAll();
 	}
 
 	public Utilisateur login(String email, String mdp) {

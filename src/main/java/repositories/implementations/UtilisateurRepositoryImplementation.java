@@ -1,5 +1,8 @@
 package repositories.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -10,7 +13,7 @@ import repositories.UtilisateurRepository;
 
 public class UtilisateurRepositoryImplementation implements UtilisateurRepository{
 	
-
+	
 	public Utilisateur create(Utilisateur utilisateur) {
 		EntityManager em = EMF.getEM();
 		Role role = em.find(Role.class, 2L);
@@ -19,6 +22,20 @@ public class UtilisateurRepositoryImplementation implements UtilisateurRepositor
 		em.persist(utilisateur);
 		em.getTransaction().commit();
 		return utilisateur;
+	}
+	
+	public List<Utilisateur> readAll() {
+		EntityManager em = EMF.getEM();
+		List<Utilisateur> utilisateurs = null;
+		//List<Utilisateur> utilisateurs = new Array;
+		Query query = em.createQuery("select u from Utilisateur u");
+		try {
+			utilisateurs = (List<Utilisateur>) query.getResultList();
+		} catch (Exception e) {
+			
+		}
+
+		return utilisateurs;
 	}
 
 	public Utilisateur login(String email, String mdp) {
